@@ -68,10 +68,10 @@ BoTSORT::BoTSORT(const Config<TrackerParams> &tracker_config,
     if (_reid_enabled && not_empty(reid_config) &&
         reid_onnx_model_path.size() > 0)
     {
-        auto reid_params =
-                fetch_config<ReIDParams>(reid_config, ReIDParams::load_config);
-        _reid_model =
-                std::make_unique<ReIDModel>(reid_params, reid_onnx_model_path);
+        // auto reid_params =
+        //         fetch_config<ReIDParams>(reid_config, ReIDParams::load_config);
+        // _reid_model =
+        //         std::make_unique<ReIDModel>(reid_params, reid_onnx_model_path);
     }
     else
     {
@@ -134,11 +134,11 @@ BoTSORT::track(const std::vector<Detection> &detections, const cv::Mat &frame)
             {
                 if (_reid_enabled)
                 {
-                    FeatureVector embedding =
-                            _extract_features(frame, detection.bbox_tlwh);
-                    tracklet = std::make_shared<Track>(
-                            tlwh, detection.confidence, detection.class_id,
-                            embedding);
+                    // FeatureVector embedding =
+                    //         _extract_features(frame, detection.bbox_tlwh);
+                    // tracklet = std::make_shared<Track>(
+                    //         tlwh, detection.confidence, detection.class_id,
+                    //         embedding);
                 }
                 else
                     tracklet = std::make_shared<Track>(
@@ -199,14 +199,14 @@ BoTSORT::track(const std::vector<Detection> &detections, const cv::Mat &frame)
 
     if (_reid_enabled)
     {
-        // If re-ID is enabled, find the embedding distance between all tracked tracks and high confidence detections
-        std::tie(raw_emd_dist, emd_dist_mask_1st_association) =
-                embedding_distance(tracks_pool, detections_high_conf,
-                                   _appearance_thresh,
-                                   _reid_model->get_distance_metric());
-        fuse_motion(*_kalman_filter, raw_emd_dist, tracks_pool,
-                    detections_high_conf,
-                    _lambda);// Fuse the motion with embedding distance
+        // // If re-ID is enabled, find the embedding distance between all tracked tracks and high confidence detections
+        // std::tie(raw_emd_dist, emd_dist_mask_1st_association) =
+        //         embedding_distance(tracks_pool, detections_high_conf,
+        //                            _appearance_thresh,
+        //                            _reid_model->get_distance_metric());
+        // fuse_motion(*_kalman_filter, raw_emd_dist, tracks_pool,
+        //             detections_high_conf,
+        //             _lambda);// Fuse the motion with embedding distance
     }
 
     // Fuse the IoU distance and embedding distance to get the final distance matrix
@@ -323,15 +323,15 @@ BoTSORT::track(const std::vector<Detection> &detections, const cv::Mat &frame)
 
     if (_reid_enabled)
     {
-        // Find embedding distance between unconfirmed tracks and high confidence detections left after the first association
-        std::tie(raw_emd_dist_unconfirmed, emd_dist_mask_unconfirmed) =
-                embedding_distance(unconfirmed_tracks,
-                                   unmatched_detections_after_1st_association,
-                                   _appearance_thresh,
-                                   _reid_model->get_distance_metric());
-        fuse_motion(*_kalman_filter, raw_emd_dist_unconfirmed,
-                    unconfirmed_tracks,
-                    unmatched_detections_after_1st_association, _lambda);
+        // // Find embedding distance between unconfirmed tracks and high confidence detections left after the first association
+        // std::tie(raw_emd_dist_unconfirmed, emd_dist_mask_unconfirmed) =
+        //         embedding_distance(unconfirmed_tracks,
+        //                            unmatched_detections_after_1st_association,
+        //                            _appearance_thresh,
+        //                            _reid_model->get_distance_metric());
+        // fuse_motion(*_kalman_filter, raw_emd_dist_unconfirmed,
+        //             unconfirmed_tracks,
+        //             unmatched_detections_after_1st_association, _lambda);
     }
 
     // Fuse the IoU distance and the embedding distance
@@ -446,8 +446,8 @@ BoTSORT::track(const std::vector<Detection> &detections, const cv::Mat &frame)
 FeatureVector BoTSORT::_extract_features(const cv::Mat &frame,
                                          const cv::Rect_<float> &bbox_tlwh)
 {
-    cv::Mat patch = frame(bbox_tlwh);
-    return _reid_model->extract_features(patch);
+    // cv::Mat patch = frame(bbox_tlwh);
+    // return _reid_model->extract_features(patch);
 }
 
 

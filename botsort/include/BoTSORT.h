@@ -5,7 +5,7 @@
 
 #include "GlobalMotionCompensation.h"
 #include "GmcParams.h"
-#include "ReID.h"
+// #include "ReID.h"
 #include "ReIDParams.h"
 #include "TrackerParams.h"
 #include "track.h"
@@ -106,5 +106,5 @@ private:
 
     std::unique_ptr<KalmanFilter> _kalman_filter;
     std::unique_ptr<GlobalMotionCompensation> _gmc_algo;
-    std::unique_ptr<ReIDModel> _reid_model;
+    // std::unique_ptr<ReIDModel> _reid_model;
 };
