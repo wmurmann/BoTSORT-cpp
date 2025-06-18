@@ -9,6 +9,7 @@
 #include "INIReader.h"
 #include "matching.h"
 #include "profiler.h"
+#include "ReID_tflite.h"
 
 namespace
 {
@@ -50,7 +51,7 @@ T fetch_config(const Config<T> &config,
 BoTSORT::BoTSORT(const Config<TrackerParams> &tracker_config,
                  const Config<GMC_Params> &gmc_config,
                  const Config<ReIDParams> &reid_config,
-                 const std::string &reid_onnx_model_path)
+                 const std::string &reid_model_path)
 {
     auto tracker_params = fetch_config<TrackerParams>(
             tracker_config, TrackerParams::load_config);
@@ -64,14 +65,14 @@ BoTSORT::BoTSORT(const Config<TrackerParams> &tracker_config,
             static_cast<double>(1.0 / _frame_rate));
 
 
-    // Re-ID module, load visual feature extractor here
+    // Re-ID module, load visual feature extractor here (model path)
     if (_reid_enabled && not_empty(reid_config) &&
-        reid_onnx_model_path.size() > 0)
+        reid_model_path.size() > 0)
     {
         auto reid_params =
                 fetch_config<ReIDParams>(reid_config, ReIDParams::load_config);
         _reid_model =
-                std::make_unique<ReIDModel>(reid_params, reid_onnx_model_path);
+                std::make_unique<ReIDModel>(reid_params, reid_model_path);
     }
     else
     {
