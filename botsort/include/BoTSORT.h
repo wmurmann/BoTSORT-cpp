@@ -8,6 +8,7 @@
 #include "ReIDParams.h"
 #include "TrackerParams.h"
 #include "track.h"
+#include "ReID_tflite.h"
 
 template<typename T>
 using Config = std::variant<T, std::string, std::monostate>;

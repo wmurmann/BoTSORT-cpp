@@ -9,7 +9,6 @@
 #include "INIReader.h"
 #include "matching.h"
 #include "profiler.h"
-#include "ReID_tflite.h"
 
 namespace
 {
