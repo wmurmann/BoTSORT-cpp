@@ -22,8 +22,7 @@ public:
 
   // --- legacy interface kept for BoTSORT.cpp -----------------
   ReIDModel(const ReIDParams& /*unused_cfg*/,
-            const std::string& tflite_path)
-      : ReIDModel(tflite_path) {}
+            const std::string& tflite_path);
 
   /** extract a 1×D feature (D = 512 for osnet-x0.25) from a BGR crop */
   FeatureVector extract(const cv::Mat& bgr_patch);
