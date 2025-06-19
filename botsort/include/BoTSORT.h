@@ -5,7 +5,6 @@
 
 #include "GlobalMotionCompensation.h"
 #include "GmcParams.h"
-#include "ReID.h"
 #include "ReIDParams.h"
 #include "TrackerParams.h"
 #include "track.h"
