@@ -1,6 +1,7 @@
 // ReID_tflite_osnet.h
 #pragma once
 #include <memory>
+#include <opencv2/imgproc.hpp>
 #include <opencv2/core.hpp>
 #include "DataType.h"                     // FeatureVector alias (1×D Eigen row)
 #include "tensorflow/lite/interpreter.h"

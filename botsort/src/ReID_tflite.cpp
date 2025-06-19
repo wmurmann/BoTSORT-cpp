@@ -1,9 +1,9 @@
 #include "ReID_tflite.h"
 
 #include <opencv2/imgproc.hpp>
-#include <tensorflow/lite/interpreter.h>
-#include <tensorflow/lite/kernels/register.h>
-#include <tensorflow/lite/model.h>
+#include "tensorflow/lite/interpreter.h"
+#include "tensorflow/lite/kernels/register.h"
+#include "tensorflow/lite/model.h"
 
 #include <iostream>
 #include <memory>
