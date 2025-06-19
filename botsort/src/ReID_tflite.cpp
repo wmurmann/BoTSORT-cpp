@@ -44,6 +44,12 @@ ReIDModel::ReIDModel(const std::string& model_path,
   out_dim_ = out_t->dims->data[1];
 }
 
+// legacy two-arg ctor (cfg not used by TFLite version)
+ReIDModel::ReIDModel(const ReIDParams& cfg, const std::string& path)
+    : ReIDModel(path) {
+  (void)cfg;  // suppress unused-variable warning
+}
+
 /* ---------------- feature extraction ---------------- */
 
 FeatureVector ReIDModel::extract(const cv::Mat& bgr_patch) {
